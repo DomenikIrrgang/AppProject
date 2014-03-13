@@ -24,7 +24,7 @@ public class Render {
 	public boolean renderPhysic = false;
 	
 	private Measure measure;
-	private float zoom = 7f;
+	private float zoom = 8f;
 	
 	public Render(Map map) {
 		this.map = map;

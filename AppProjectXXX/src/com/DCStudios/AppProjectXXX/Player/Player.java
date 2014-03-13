@@ -11,10 +11,12 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 public class Player extends Entity implements PlayerInterface {
 
-	Mode mode;
+	private Mode mode;
+	private float speed = 1;
+	private Vector2 velocity = new Vector2(1,0);
 	
-	public Player(Texture texture, Vector2 position, Measure measure) {
-		super(texture, position, measure);	
+	public Player(Vector2 position, Measure measure) {
+		super(new Texture("data/baum.png"), position, measure);	
 		mode = Mode.FIRE;
 	}
 	
@@ -29,7 +31,7 @@ public class Player extends Entity implements PlayerInterface {
 	@Override
 	protected void setUpBody() {
 		bodyDef = new BodyDef();
-		bodyDef.type = BodyType.DynamicBody;
+		bodyDef.type = BodyType.KinematicBody;
 		bodyDef.position.set(position.x + measure.width / 2, position.y + measure.height / 2);
 		
 		body = this.world.createBody(bodyDef);
@@ -53,7 +55,7 @@ public class Player extends Entity implements PlayerInterface {
 	@Override
 	public void update() {
 		super.update();
-		//body.applyForceToCenter(new Vector2(), wake);
+		body.setLinearVelocity(velocity.x * speed, velocity.y * speed);	
 	}
 
 }
