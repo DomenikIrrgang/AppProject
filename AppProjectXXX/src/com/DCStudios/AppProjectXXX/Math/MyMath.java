@@ -8,7 +8,7 @@ public class MyMath {
 			Vector2 position2, Measure measure2) {
 		if (position2.x - measure2.width / 2 >= position1.x - measure1.width / 2 - 5f &&
 			position2.x + measure2.width / 2 <= position1.x + measure1.width / 2 + 5f &&
-			position2.y + measure2.height / 2 <= position1.y + measure1.height / 2  + 5f &&
+			position2.y + measure2.height / 2 <= position1.y + measure1.height / 2 + 5f &&
 			position2.y - measure2.height / 2 >= position1.y - measure1.height - 5f) {
 			return true;
 		}

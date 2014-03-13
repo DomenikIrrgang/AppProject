@@ -42,8 +42,8 @@ public class Player extends Entity implements PlayerInterface {
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
 		fixtureDef.density = 1.0f;
-		fixtureDef.friction = 1.0f;
-		fixtureDef.restitution = 0.0f;
+		fixtureDef.friction = 0.0f;
+		fixtureDef.restitution = 1.0f;
 		body.setFixedRotation(true);
 				
 		body.createFixture(fixtureDef); 
@@ -55,7 +55,8 @@ public class Player extends Entity implements PlayerInterface {
 	@Override
 	public void update() {
 		super.update();
-		body.setLinearVelocity(velocity.x * speed, velocity.y * speed);	
+		body.applyForceToCenter(new Vector2(velocity.x * speed, velocity.y * speed), true);	
+
 	}
 
 }

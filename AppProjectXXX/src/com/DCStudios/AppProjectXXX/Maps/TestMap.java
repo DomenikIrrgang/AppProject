@@ -15,9 +15,10 @@ public class TestMap extends Map {
 
 	public TestMap(Screen screen) {
 		super(screen);
-		this.addEntity(new Player(new Vector2(15,15), new Measure(5,5)));
+		this.addEntity(new Player(new Vector2(10,10), new Measure(7,7)));
 		Light light = new PointLight(rayHandler, 200, new Color(0.5f, 0.3f, 0.6f, 1f), 200f, 25f, 25f);
 		addGround(0, 0, 300, 2);
+		addGround(300,0,2,100);
 		background = new TestBackGround();
 	}
 

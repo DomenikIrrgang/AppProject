@@ -29,10 +29,10 @@ public class Map implements MapInterface, DrawableCollection {
 	protected RayHandler rayHandler;
 	
 	protected Array<Entity> entitys = new Array<Entity>();
-	
-	protected Measure measure;	
 	protected BackGround background;
 	
+	protected Measure measure;	
+
 	public Map(Screen screen) {
 		this.screen = screen;
 		world = new World(new Vector2(0, -9.4f), false);

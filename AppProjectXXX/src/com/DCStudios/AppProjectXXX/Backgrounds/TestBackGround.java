@@ -9,9 +9,9 @@ public class TestBackGround extends BackGround {
 
 	@Override
 	protected void setUpBackGround() {
-		for (int i = 1; i < 10; i++)
-			for (int k = 1; k < 10; k++)
-				backGround.add(new Grass(new Vector2((i-1) * 10, (k-1) * 10), new Measure(10,10)));
+		for (int i = 1; i < 15; i++)
+			for (int k = 1; k < 11; k++)
+				backGround.add(new Grass(new Vector2((i-1) * 5, (k-1) * 5), new Measure(5,5)));
 	}
 
 }

@@ -25,6 +25,7 @@ public class Render {
 	
 	private Measure measure;
 	private float zoom = 8f;
+
 	
 	public Render(Map map) {
 		this.map = map;
@@ -41,17 +42,14 @@ public class Render {
 		testCamera.update();
 		
 		batch = new SpriteBatch();
-		batch.setProjectionMatrix(testCamera.combined);
+		batch.setProjectionMatrix(camera.combined);
 	}
 	
 	public void render() {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
-		batch.setProjectionMatrix(testCamera.combined);
-		
-		camera.position.x += 1;
-		camera.position.y += 1;
+		batch.setProjectionMatrix(camera.combined);
 		
 		map.step();
 		batch.begin();
