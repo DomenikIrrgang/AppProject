@@ -4,14 +4,18 @@ import java.util.Iterator;
 
 import box2dLight.RayHandler;
 
+import com.DCStudios.AppProjectXXX.Background.Ground;
 import com.DCStudios.AppProjectXXX.Datastructures.Measure;
 import com.DCStudios.AppProjectXXX.Entity.Entity;
 import com.DCStudios.AppProjectXXX.Map.Map;
+import com.DCStudios.AppProjectXXX.Math.MyMath;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.utils.Array;
 
 public class Render {
 	
@@ -72,8 +76,7 @@ public class Render {
 	
 	private void renderLight() {
 		if (renderLight) {
-			LightRender.getRayHandler().setCombinedMatrix(camera.combined);
-			LightRender.getRayHandler().updateAndRender();
+			LightRender.render(camera);
 		}
 	}
 	private void renderBackground() {
@@ -93,13 +96,31 @@ public class Render {
 	}
 	
 	private void renderDrawablesInView(DrawableCollection drawables) {
-		Iterator<Drawable> graphics = drawables.getDrawablesInView(camera).iterator();
+		Iterator<Drawable> graphics = getDrawableInView(drawables).iterator();
 		Drawable graphic;
 		
 		while (graphics.hasNext()) {
 			graphic = graphics.next();
 			graphic.draw(batch);
 		}
+	}
+	
+	private Array<Drawable> getDrawableInView(DrawableCollection drawables) {
+		Vector2 position = new Vector2(camera.position.x, camera.position.y);
+		Measure measure = new Measure(camera.viewportWidth, camera.viewportHeight);
+		
+		Array<Drawable> temp = new Array<Drawable>();
+		Iterator<Drawable> eIter = drawables.getDrawables().iterator();
+		Drawable drawable;
+		
+		while (eIter.hasNext()) {
+			drawable = eIter.next();
+			if (MyMath.fitsIn(position, measure, drawable.getPosition(), drawable.getMeasure())) {
+				temp.add(drawable);
+			}
+		}
+		
+		return temp;
 	}
 	
 	public void dispose() {

@@ -10,5 +10,4 @@ public interface MapInterface {
 	void update();
 	void dispose();
 	BackGround getBackground();
-	Array<Entity> getDrawables();
 }
