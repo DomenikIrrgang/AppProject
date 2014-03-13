@@ -7,14 +7,19 @@ import box2dLight.RayHandler;
 import com.DCStudios.AppProjectXXX.Background.BackGround;
 import com.DCStudios.AppProjectXXX.Datastructures.Measure;
 import com.DCStudios.AppProjectXXX.Entity.Entity;
+import com.DCStudios.AppProjectXXX.Rendering.Drawable;
+import com.DCStudios.AppProjectXXX.Rendering.DrawableCollection;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 
-public class Map implements MapInterface {
+public class Map implements MapInterface, DrawableCollection {
 	
 	protected Screen screen;
 	
@@ -29,7 +34,7 @@ public class Map implements MapInterface {
 	
 	public Map(Screen screen) {
 		this.screen = screen;
-		world = new World(new Vector2(0, -10f), false);
+		world = new World(new Vector2(0, -9.4f), false);
 		box2DRenderer = new Box2DDebugRenderer();
 		rayHandler = new RayHandler(world);		
 	}
@@ -54,6 +59,17 @@ public class Map implements MapInterface {
 	protected void addEntity(Entity entity) {
 		entitys.add(entity);
 		entity.setWorld(world);
+	}
+	
+	protected void addGround(float x, float y, float width, float height) {
+		BodyDef groundBodyDef = new BodyDef();
+		groundBodyDef.position.set(x, y);
+
+		Body groundBody = world.createBody(groundBodyDef);
+
+		PolygonShape groundBox = new PolygonShape();
+		groundBox.setAsBox(width, height);
+		groundBody.createFixture(groundBox, 0.0f);
 	}
 
 	@Override
@@ -83,7 +99,7 @@ public class Map implements MapInterface {
 	}
 	
 	@Override
-	public Array<Entity> getDrawablesInView(OrthographicCamera camera) {
+	public Array<Drawable> getDrawablesInView(OrthographicCamera camera) {
 		Vector2 position = new Vector2(camera.position.x, camera.position.y);
 		Measure measure = new Measure(camera.viewportWidth, camera.viewportHeight);
 		
@@ -92,7 +108,7 @@ public class Map implements MapInterface {
 		float borderTop = position.y + measure.height / 2 + 5f;
 		float borderBottom = position.y - measure.height / 2 - 5f;
 		
-		Array<Entity> temp = new Array<Entity>();
+		Array<Drawable> temp = new Array<Drawable>();
 		Iterator<Entity> eIter = entitys.iterator();
 		Entity entity;
 		

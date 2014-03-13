@@ -17,12 +17,14 @@ public class Render {
 	private SpriteBatch batch;
 	private OrthographicCamera camera;
 	
-	public boolean renderLight = true;
-	public boolean renderBackground = false;
+	private OrthographicCamera testCamera;
+	
+	public boolean renderLight = false;
+	public boolean renderBackground = true;
 	public boolean renderPhysic = false;
 	
 	private Measure measure;
-	private float zoom = 8f;
+	private float zoom = 7f;
 	
 	public Render(Map map) {
 		this.map = map;
@@ -34,14 +36,19 @@ public class Render {
 		camera.setToOrtho(false, measure.width, measure.height);
 		camera.update();
 		
+		testCamera = new OrthographicCamera();
+		testCamera.setToOrtho(false, measure.width * 2, measure.height * 2);
+		testCamera.update();
+		
 		batch = new SpriteBatch();
-		batch.setProjectionMatrix(camera.combined);
+		batch.setProjectionMatrix(testCamera.combined);
 	}
 	
 	public void render() {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.setProjectionMatrix(camera.combined);
+		
+		batch.setProjectionMatrix(testCamera.combined);
 		
 		map.step();
 		batch.begin();
@@ -63,7 +70,7 @@ public class Render {
 	}
 	private void renderBackground() {
 		if (renderBackground) {
-			map.getBackground().draw(batch);
+			renderDrawablesInView(map.getBackground());
 		}
 	}
 	
@@ -74,7 +81,11 @@ public class Render {
 	}
 	
 	private void renderGraphics() {
-		Iterator<Entity> graphics = map.getDrawablesInView(camera).iterator();
+		renderDrawablesInView(map);
+	}
+	
+	private void renderDrawablesInView(DrawableCollection drawables) {
+		Iterator<Drawable> graphics = drawables.getDrawablesInView(camera).iterator();
 		Drawable graphic;
 		
 		while (graphics.hasNext()) {

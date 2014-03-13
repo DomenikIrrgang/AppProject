@@ -1,12 +1,13 @@
 package com.DCStudios.AppProjectXXX.Background;
 
 import com.DCStudios.AppProjectXXX.Datastructures.Measure;
+import com.DCStudios.AppProjectXXX.Rendering.Drawable;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
-public abstract class Ground {
+public abstract class Ground implements Drawable {
 	protected Vector2 position;
 	protected Measure measure;
 
@@ -44,6 +45,7 @@ public abstract class Ground {
 		this.measure = measure;
 	}
 
+	@Override
 	public void draw(SpriteBatch batch) {
 		sprite.draw(batch);
 	}

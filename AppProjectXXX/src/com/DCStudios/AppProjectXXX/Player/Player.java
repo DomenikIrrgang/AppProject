@@ -1,4 +1,4 @@
-package com.DCStudios.AppProjectXXX.Models;
+package com.DCStudios.AppProjectXXX.Player;
 
 import com.DCStudios.AppProjectXXX.Datastructures.Measure;
 import com.DCStudios.AppProjectXXX.Entity.Entity;
@@ -9,10 +9,21 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
-public class TestModel extends Entity {
+public class Player extends Entity implements PlayerInterface {
 
-	public TestModel(Vector2 position, Measure measure) {
-		super(new Texture("data/baum.png"), position, measure);
+	Mode mode;
+	
+	public Player(Texture texture, Vector2 position, Measure measure) {
+		super(texture, position, measure);	
+		mode = Mode.FIRE;
+	}
+	
+	@Override
+	public void jump() {
+	}
+
+	@Override
+	public void switchMode() {
 	}
 
 	@Override
@@ -30,13 +41,19 @@ public class TestModel extends Entity {
 		fixtureDef.shape = shape;
 		fixtureDef.density = 1.0f;
 		fixtureDef.friction = 1.0f;
-		fixtureDef.restitution = 0.5f;
+		fixtureDef.restitution = 0.0f;
 		body.setFixedRotation(true);
 				
 		body.createFixture(fixtureDef); 
 		
 		sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
 		body.setUserData(this);		
+	}
+	
+	@Override
+	public void update() {
+		super.update();
+		//body.applyForceToCenter(new Vector2(), wake);
 	}
 
 }

@@ -13,5 +13,4 @@ public interface MapInterface {
 	void dispose();
 	BackGround getBackground();
 	Array<Entity> getDrawables();
-	Array<Entity> getDrawablesInView(OrthographicCamera camera);
 }
