@@ -37,7 +37,7 @@ public class Render {
 		camera.update();
 		
 		testCamera = new OrthographicCamera();
-		testCamera.setToOrtho(false, measure.width * 2, measure.height * 2);
+		testCamera.setToOrtho(false, measure.width * 6, measure.height * 6);
 		testCamera.update();
 		
 		batch = new SpriteBatch();
@@ -49,6 +49,9 @@ public class Render {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		batch.setProjectionMatrix(testCamera.combined);
+		
+		camera.position.x += 1;
+		camera.position.y += 1;
 		
 		map.step();
 		batch.begin();

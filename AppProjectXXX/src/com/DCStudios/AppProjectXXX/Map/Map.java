@@ -7,6 +7,7 @@ import box2dLight.RayHandler;
 import com.DCStudios.AppProjectXXX.Background.BackGround;
 import com.DCStudios.AppProjectXXX.Datastructures.Measure;
 import com.DCStudios.AppProjectXXX.Entity.Entity;
+import com.DCStudios.AppProjectXXX.Math.MyMath;
 import com.DCStudios.AppProjectXXX.Rendering.Drawable;
 import com.DCStudios.AppProjectXXX.Rendering.DrawableCollection;
 import com.badlogic.gdx.Screen;
@@ -103,21 +104,13 @@ public class Map implements MapInterface, DrawableCollection {
 		Vector2 position = new Vector2(camera.position.x, camera.position.y);
 		Measure measure = new Measure(camera.viewportWidth, camera.viewportHeight);
 		
-		float borderLeft = position.x - measure.width / 2 - 5f;
-		float borderRight = position.x + measure.width /2 + 5f;
-		float borderTop = position.y + measure.height / 2 + 5f;
-		float borderBottom = position.y - measure.height / 2 - 5f;
-		
 		Array<Drawable> temp = new Array<Drawable>();
 		Iterator<Entity> eIter = entitys.iterator();
 		Entity entity;
 		
 		while (eIter.hasNext()) {
 			entity = eIter.next();
-			if (entity.getPosition().x + entity.getMeasure().width / 2 >= borderLeft &&
-				entity.getPosition().x - entity.getMeasure().width / 2 <= borderRight &&
-				entity.getPosition().y - entity.getMeasure().height / 2 <= borderTop &&
-				entity.getPosition().y + entity.getMeasure().height / 2 >= borderBottom) {
+			if (MyMath.fitsIn(position, measure, entity.getPosition(), entity.getMeasure())) {
 				temp.add(entity);
 			}
 		}
