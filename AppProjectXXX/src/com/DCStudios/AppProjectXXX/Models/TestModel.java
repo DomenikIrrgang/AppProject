@@ -2,6 +2,7 @@ package com.DCStudios.AppProjectXXX.Models;
 
 import com.DCStudios.AppProjectXXX.Datastructures.Measure;
 import com.DCStudios.AppProjectXXX.Entity.Entity;
+import com.DCStudios.AppProjectXXX.Resources.Resources;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -12,7 +13,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 public class TestModel extends Entity {
 
 	public TestModel(Vector2 position, Measure measure) {
-		super(new Texture("data/baum.png"), position, measure);
+		super(Resources.get(Resources.TREE, Texture.class), position, measure);
 	}
 
 	@Override

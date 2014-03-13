@@ -1,5 +1,6 @@
 package com.DCStudios.AppProjectXXX;
 
+import com.DCStudios.AppProjectXXX.Resources.Resources;
 import com.DCStudios.AppProjectXXX.Screens.GameScreen;
 import com.badlogic.gdx.Game;
 
@@ -9,6 +10,7 @@ public class ProjectMain extends Game {
 	
 	@Override
 	public void create() {		
+		Resources.load();
 		setScreen(new GameScreen(this));
 	}
 

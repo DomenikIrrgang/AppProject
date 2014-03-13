@@ -2,6 +2,7 @@ package com.DCStudios.AppProjectXXX.Player;
 
 import com.DCStudios.AppProjectXXX.Datastructures.Measure;
 import com.DCStudios.AppProjectXXX.Entity.Entity;
+import com.DCStudios.AppProjectXXX.Resources.Resources;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -12,11 +13,11 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 public class Player extends Entity implements PlayerInterface {
 
 	private Mode mode;
-	private float speed = 1;
+	private float speed = 10000;
 	private Vector2 velocity = new Vector2(1,0);
 	
 	public Player(Vector2 position, Measure measure) {
-		super(new Texture("data/baum.png"), position, measure);	
+		super(Resources.get(Resources.TREE, Texture.class), position, measure);	
 		mode = Mode.FIRE;
 	}
 	
@@ -31,7 +32,7 @@ public class Player extends Entity implements PlayerInterface {
 	@Override
 	protected void setUpBody() {
 		bodyDef = new BodyDef();
-		bodyDef.type = BodyType.KinematicBody;
+		bodyDef.type = BodyType.DynamicBody;
 		bodyDef.position.set(position.x + measure.width / 2, position.y + measure.height / 2);
 		
 		body = this.world.createBody(bodyDef);
