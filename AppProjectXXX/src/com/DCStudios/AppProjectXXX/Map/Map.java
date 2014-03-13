@@ -10,6 +10,7 @@ import com.DCStudios.AppProjectXXX.Entity.Entity;
 import com.DCStudios.AppProjectXXX.Math.MyMath;
 import com.DCStudios.AppProjectXXX.Rendering.Drawable;
 import com.DCStudios.AppProjectXXX.Rendering.DrawableCollection;
+import com.DCStudios.AppProjectXXX.Rendering.LightRender;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
@@ -25,8 +26,6 @@ public class Map implements MapInterface, DrawableCollection {
 	protected Screen screen;
 	
 	protected World world;
-	protected Box2DDebugRenderer box2DRenderer;
-	protected RayHandler rayHandler;
 	
 	protected Array<Entity> entitys = new Array<Entity>();
 	protected BackGround background;
@@ -35,20 +34,8 @@ public class Map implements MapInterface, DrawableCollection {
 
 	public Map(Screen screen) {
 		this.screen = screen;
-		world = new World(new Vector2(0, -9.4f), false);
-		box2DRenderer = new Box2DDebugRenderer();
-		rayHandler = new RayHandler(world);		
-	}
-
-	@Override
-	public void renderLight(OrthographicCamera camera) {
-		rayHandler.setCombinedMatrix(camera.combined);
-		rayHandler.updateAndRender();
-	}
-
-	@Override
-	public void renderPhysics(OrthographicCamera camera) {
-		box2DRenderer.render(world, camera.combined);
+		world = new World(new Vector2(0, -9.4f), false);	
+		LightRender.initLightRender(world);
 	}
 
 	@Override
@@ -86,7 +73,6 @@ public class Map implements MapInterface, DrawableCollection {
 	public void dispose() {
 		background.dispose();
 		world.dispose();
-		box2DRenderer.dispose();
 	}
 
 	@Override
@@ -116,6 +102,10 @@ public class Map implements MapInterface, DrawableCollection {
 		}
 		
 		return temp;
+	}
+	
+	public World getWorld() {
+		return world;
 	}
 	
 	public Screen getScreen() {

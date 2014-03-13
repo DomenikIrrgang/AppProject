@@ -2,6 +2,8 @@ package com.DCStudios.AppProjectXXX.Rendering;
 
 import java.util.Iterator;
 
+import box2dLight.RayHandler;
+
 import com.DCStudios.AppProjectXXX.Datastructures.Measure;
 import com.DCStudios.AppProjectXXX.Entity.Entity;
 import com.DCStudios.AppProjectXXX.Map.Map;
@@ -9,6 +11,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 
 public class Render {
 	
@@ -16,12 +19,13 @@ public class Render {
 	
 	private SpriteBatch batch;
 	private OrthographicCamera camera;
-	
 	private OrthographicCamera testCamera;
 	
-	public boolean renderLight = false;
+	public boolean renderLight = true;
 	public boolean renderBackground = true;
 	public boolean renderPhysic = false;
+	
+	private Box2DDebugRenderer box2DRenderer;
 	
 	private Measure measure;
 	private float zoom = 8f;
@@ -29,6 +33,8 @@ public class Render {
 	
 	public Render(Map map) {
 		this.map = map;
+		
+		box2DRenderer = new Box2DDebugRenderer();
 		
 		measure = new Measure(Gdx.graphics.getWidth() / zoom,
 				Gdx.graphics.getHeight() / zoom);
@@ -66,7 +72,8 @@ public class Render {
 	
 	private void renderLight() {
 		if (renderLight) {
-			map.renderLight(camera);
+			LightRender.getRayHandler().setCombinedMatrix(camera.combined);
+			LightRender.getRayHandler().updateAndRender();
 		}
 	}
 	private void renderBackground() {
@@ -77,7 +84,7 @@ public class Render {
 	
 	private void renderPhysic() {
 		if (renderPhysic) {
-			map.renderPhysics(camera);
+			box2DRenderer.render(map.getWorld(), camera.combined);
 		}
 	}
 	
@@ -96,6 +103,7 @@ public class Render {
 	}
 	
 	public void dispose() {
+		box2DRenderer.dispose();
 		batch.dispose();
 	}
 }

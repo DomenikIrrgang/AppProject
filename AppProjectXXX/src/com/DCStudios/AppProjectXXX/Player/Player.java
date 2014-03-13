@@ -13,7 +13,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 public class Player extends Entity implements PlayerInterface {
 
 	private Mode mode;
-	private float speed = 10000;
+	private float speed = 100;
 	private Vector2 velocity = new Vector2(1,0);
 	
 	public Player(Vector2 position, Measure measure) {
@@ -44,7 +44,7 @@ public class Player extends Entity implements PlayerInterface {
 		fixtureDef.shape = shape;
 		fixtureDef.density = 1.0f;
 		fixtureDef.friction = 0.0f;
-		fixtureDef.restitution = 1.0f;
+		fixtureDef.restitution = 0.2f;
 		body.setFixedRotation(true);
 				
 		body.createFixture(fixtureDef); 

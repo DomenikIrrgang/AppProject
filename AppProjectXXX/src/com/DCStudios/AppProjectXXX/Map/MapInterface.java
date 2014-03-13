@@ -6,8 +6,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.Array;
 
 public interface MapInterface {
-	void renderLight(OrthographicCamera camera);
-	void renderPhysics(OrthographicCamera camera);
 	void step();
 	void update();
 	void dispose();
