@@ -44,7 +44,7 @@ public class Player extends Entity implements PlayerInterface {
 		fixtureDef.shape = shape;
 		fixtureDef.density = 1.0f;
 		fixtureDef.friction = 0.0f;
-		fixtureDef.restitution = 0.2f;
+		fixtureDef.restitution = 1.0f;
 		body.setFixedRotation(true);
 				
 		body.createFixture(fixtureDef); 

@@ -5,8 +5,10 @@ import java.util.Iterator;
 import com.DCStudios.AppProjectXXX.Background.BackGround;
 import com.DCStudios.AppProjectXXX.Datastructures.Measure;
 import com.DCStudios.AppProjectXXX.Entity.Entity;
+import com.DCStudios.AppProjectXXX.Player.Player;
 import com.DCStudios.AppProjectXXX.Rendering.Drawable;
 import com.DCStudios.AppProjectXXX.Rendering.LightRender;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -15,13 +17,14 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 
-public class Map implements MapInterface {
+public abstract class Map implements MapInterface {
 	
 	protected Screen screen;
 	
 	protected World world;
 	
 	protected Array<Entity> entitys = new Array<Entity>();
+	protected Player player;
 	protected BackGround background;
 	
 	protected Measure measure;	
@@ -30,6 +33,7 @@ public class Map implements MapInterface {
 		this.screen = screen;
 		world = new World(new Vector2(0, -9.4f), false);	
 		LightRender.initLightRender(world);
+		setUpPlayer();
 	}
 
 	@Override
@@ -90,5 +94,9 @@ public class Map implements MapInterface {
 	public Measure getMeasure() {
 		return measure;
 	}
-
+	
+	public Player getPlayer() {
+		return player;
+	}
+	
 }
