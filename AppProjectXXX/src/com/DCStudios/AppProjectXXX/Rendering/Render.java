@@ -2,12 +2,8 @@ package com.DCStudios.AppProjectXXX.Rendering;
 
 import java.util.Iterator;
 
-import box2dLight.RayHandler;
-
-import com.DCStudios.AppProjectXXX.Background.Ground;
 import com.DCStudios.AppProjectXXX.Datastructures.Measure;
-import com.DCStudios.AppProjectXXX.Entity.Entity;
-import com.DCStudios.AppProjectXXX.Map.Map;
+import com.DCStudios.AppProjectXXX.Map.MapInterface;
 import com.DCStudios.AppProjectXXX.Math.MyMath;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -19,23 +15,23 @@ import com.badlogic.gdx.utils.Array;
 
 public class Render {
 	
-	private Map map;
+	private MapInterface map;
 	
 	private SpriteBatch batch;
 	private OrthographicCamera camera;
 	private OrthographicCamera testCamera;
 	
-	public boolean renderLight = true;
+	public boolean renderLight = false;
 	public boolean renderBackground = true;
 	public boolean renderPhysic = false;
 	
 	private Box2DDebugRenderer box2DRenderer;
 	
 	private Measure measure;
-	private float zoom = 8f;
+	private float zoom = 1f;
 
 	
-	public Render(Map map) {
+	public Render(MapInterface map) {
 		this.map = map;
 		
 		box2DRenderer = new Box2DDebugRenderer();

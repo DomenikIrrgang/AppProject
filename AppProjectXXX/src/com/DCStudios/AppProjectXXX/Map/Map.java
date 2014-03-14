@@ -6,7 +6,6 @@ import com.DCStudios.AppProjectXXX.Background.BackGround;
 import com.DCStudios.AppProjectXXX.Datastructures.Measure;
 import com.DCStudios.AppProjectXXX.Entity.Entity;
 import com.DCStudios.AppProjectXXX.Rendering.Drawable;
-import com.DCStudios.AppProjectXXX.Rendering.DrawableCollection;
 import com.DCStudios.AppProjectXXX.Rendering.LightRender;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.math.Vector2;
@@ -16,7 +15,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 
-public class Map implements MapInterface, DrawableCollection {
+public class Map implements MapInterface {
 	
 	protected Screen screen;
 	
