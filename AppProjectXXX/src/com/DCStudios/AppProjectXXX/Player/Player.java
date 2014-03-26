@@ -1,32 +1,35 @@
 package com.DCStudios.AppProjectXXX.Player;
 
 import com.DCStudios.AppProjectXXX.Datastructures.Measure;
-import com.DCStudios.AppProjectXXX.Entity.Entity;
+import com.DCStudios.AppProjectXXX.Mode.Mode;
+import com.DCStudios.AppProjectXXX.Mode.canModeChange;
+import com.DCStudios.AppProjectXXX.Object.GameObject;
 import com.DCStudios.AppProjectXXX.Resources.Resources;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
-public class Player extends Entity implements PlayerInterface {
+public class Player extends GameObject implements PlayerInterface, canModeChange {
 
-	private Mode mode;
-	private float speed = 100;
+	private float speed = 40;
 	private Vector2 velocity = new Vector2(1,0);
+	private boolean alive = true;
 	
 	public Player(Vector2 position, Measure measure) {
 		super(Resources.get(Resources.TREE, Texture.class), position, measure);	
-		mode = Mode.FIRE;
+		changeMode(Mode.ICE);
 	}
 	
 	@Override
 	public void jump() {
 	}
 
-	@Override
-	public void switchMode() {
+	public void setVelocity(int x, int y) {
+		this.velocity.x = x;
+		this.velocity.y = y;
 	}
 
 	@Override
@@ -56,8 +59,27 @@ public class Player extends Entity implements PlayerInterface {
 	@Override
 	public void update() {
 		super.update();
-		body.applyForceToCenter(new Vector2(velocity.x * speed, velocity.y * speed), true);	
+		body.setLinearVelocity(velocity.x * speed, velocity.y * speed);
+		//body.applyForceToCenter(new Vector2(velocity.x * speed, velocity.y * speed), true);			
+	}
+	
+	@Override
+	protected void changeTexture(Mode mode) {
+		if (mode.equals(Mode.ICE)) {
+			setTexture(Resources.get(Resources.PLAYER_ICE, Texture.class));
+		} else {
+			setTexture(Resources.get(Resources.PLAYER_FIRE, Texture.class));
+		}
+	}
 
+	@Override
+	public void setAlive(boolean alive) {
+		this.alive = alive;
+	}
+
+	@Override
+	public boolean isAlive() {
+		return alive;
 	}
 
 }

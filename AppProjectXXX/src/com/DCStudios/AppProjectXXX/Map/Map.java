@@ -3,12 +3,13 @@ package com.DCStudios.AppProjectXXX.Map;
 import java.util.Iterator;
 
 import com.DCStudios.AppProjectXXX.Background.BackGround;
+import com.DCStudios.AppProjectXXX.Collision.CollisionListener;
 import com.DCStudios.AppProjectXXX.Datastructures.Measure;
 import com.DCStudios.AppProjectXXX.Entity.Entity;
 import com.DCStudios.AppProjectXXX.Player.Player;
 import com.DCStudios.AppProjectXXX.Rendering.Drawable;
 import com.DCStudios.AppProjectXXX.Rendering.LightRender;
-import com.badlogic.gdx.Gdx;
+import com.DCStudios.AppProjectXXX.Screens.GameScreen;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -19,9 +20,10 @@ import com.badlogic.gdx.utils.Array;
 
 public abstract class Map implements MapInterface {
 	
-	protected Screen screen;
+	protected GameScreen screen;
 	
 	protected World world;
+	protected CollisionListener collisionListener = new CollisionListener();
 	
 	protected Array<Entity> entitys = new Array<Entity>();
 	protected Player player;
@@ -29,9 +31,10 @@ public abstract class Map implements MapInterface {
 	
 	protected Measure measure;	
 
-	public Map(Screen screen) {
+	public Map(GameScreen screen) {
 		this.screen = screen;
-		world = new World(new Vector2(0, -9.4f), false);	
+		world = new World(new Vector2(0, 0f), false);	
+		world.setContactListener(collisionListener);
 		LightRender.initLightRender(world);
 		setUpPlayer();
 	}
@@ -45,6 +48,13 @@ public abstract class Map implements MapInterface {
 	protected void addEntity(Entity entity) {
 		entitys.add(entity);
 		entity.setWorld(world);
+	}
+	
+	protected void setUpMapBounds(Measure measure) {
+		addGround(measure.width / 2, -2, measure.width / 2, 2);
+		//addGround(300,0,2,100);
+		addGround(-2,measure.height / 2,2,measure.height / 2);
+		addGround(measure.width / 2,measure.height,measure.width / 2,2);
 	}
 	
 	protected void addGround(float x, float y, float width, float height) {

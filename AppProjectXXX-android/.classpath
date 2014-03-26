@@ -7,6 +7,7 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="lib" path="/AppProjectXXX/libs/gdx.jar" sourcepath="/AppProjectXXX/libs/gdx-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/gdx-backend-android.jar" sourcepath="libs/gdx-backend-android-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="/AppProjectXXX/libs/box2dlights.jar"/>
 	<classpathentry exported="true" kind="lib" path="/AppProjectXXX/libs/tween-engine-api.jar" sourcepath="/AppProjectXXX/libs/tween-engine-api-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="/AppProjectXXX/libs/bodyeditor-loader.jar" sourcepath="/AppProjectXXX/libs/bodyeditor-loader-sources.jar"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>

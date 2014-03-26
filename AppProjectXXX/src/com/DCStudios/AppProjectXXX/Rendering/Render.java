@@ -23,21 +23,22 @@ public class Render {
 
 	public boolean renderLight = false;
 	public boolean renderBackground = true;
-	public boolean renderPhysic = false;
+	public boolean renderPhysic = true;
 
 	private Box2DDebugRenderer box2DRenderer;
 
 	private Measure measure;
-	private float zoom = 8f;
+	private float zoom = 10f;
 
 	public Render(MapInterface map) {
 		this.map = map;
 
 		box2DRenderer = new Box2DDebugRenderer();
+		
 
 		measure = new Measure(Gdx.graphics.getWidth() / zoom,
 				Gdx.graphics.getHeight() / zoom);
-
+		
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, measure.width, measure.height);
 		camera.update();
@@ -54,6 +55,7 @@ public class Render {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+		Gdx.app.log("FPS", String.valueOf(Gdx.graphics.getFramesPerSecond()));
 		batch.setProjectionMatrix(camera.combined);
 
 		map.step();

@@ -9,7 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 public class Grass extends Ground {
 
 	public Grass(Vector2 position, Measure measure) {
-		super(position, measure, Resources.get(Resources.GRASS, Texture.class));
+		super(position, measure, Resources.get(Resources.BACKGROUND_STAR, Texture.class));
 	}
 
 }

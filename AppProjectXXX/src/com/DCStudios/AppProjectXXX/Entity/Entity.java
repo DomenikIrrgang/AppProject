@@ -57,6 +57,11 @@ public abstract class Entity implements Drawable {
 	public Texture getTexture() {
 		return texture;
 	}
+	
+	public void setTexture(Texture texture) {
+		this.texture = texture;
+		sprite.setTexture(this.texture);
+	}
 
 	public Sprite getSprite() {
 		return sprite;
