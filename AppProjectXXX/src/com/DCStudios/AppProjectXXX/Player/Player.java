@@ -2,9 +2,12 @@ package com.DCStudios.AppProjectXXX.Player;
 
 import com.DCStudios.AppProjectXXX.Datastructures.Measure;
 import com.DCStudios.AppProjectXXX.Mode.Mode;
-import com.DCStudios.AppProjectXXX.Mode.canModeChange;
+import com.DCStudios.AppProjectXXX.Mode.CanModeChange;
+import com.DCStudios.AppProjectXXX.Object.Collectable;
 import com.DCStudios.AppProjectXXX.Object.GameObject;
+import com.DCStudios.AppProjectXXX.Object.CanCollect;
 import com.DCStudios.AppProjectXXX.Resources.Resources;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -12,19 +15,17 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 
-public class Player extends GameObject implements PlayerInterface, canModeChange {
+public class Player extends GameObject implements PlayerInterface, CanModeChange, CanCollect {
 
 	private float speed = 40;
 	private Vector2 velocity = new Vector2(1,0);
+	
 	private boolean alive = true;
+	private int points = 0;
 	
 	public Player(Vector2 position, Measure measure) {
 		super(Resources.get(Resources.TREE, Texture.class), position, measure);	
 		changeMode(Mode.ICE);
-	}
-	
-	@Override
-	public void jump() {
 	}
 
 	public void setVelocity(int x, int y) {
@@ -41,7 +42,7 @@ public class Player extends GameObject implements PlayerInterface, canModeChange
 		body = this.world.createBody(bodyDef);
 		
 		shape = new PolygonShape();
-		((PolygonShape) shape).setAsBox(measure.width / 2 - 0.5f, measure.height / 2 - 0.5f);
+		((PolygonShape) shape).setAsBox(measure.width / 2, measure.height / 2);
 		
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
@@ -71,6 +72,10 @@ public class Player extends GameObject implements PlayerInterface, canModeChange
 			setTexture(Resources.get(Resources.PLAYER_FIRE, Texture.class));
 		}
 	}
+	
+	public Vector2 getVelocity() {
+		return velocity;
+	}
 
 	@Override
 	public void setAlive(boolean alive) {
@@ -81,5 +86,13 @@ public class Player extends GameObject implements PlayerInterface, canModeChange
 	public boolean isAlive() {
 		return alive;
 	}
+
+	@Override
+	public void addValue(int value) {
+		points += value;
+		Gdx.app.log("points", String.valueOf(points));
+	}
+
+	
 
 }

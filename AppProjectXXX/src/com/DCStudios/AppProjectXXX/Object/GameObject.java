@@ -3,11 +3,11 @@ package com.DCStudios.AppProjectXXX.Object;
 import com.DCStudios.AppProjectXXX.Datastructures.Measure;
 import com.DCStudios.AppProjectXXX.Entity.Entity;
 import com.DCStudios.AppProjectXXX.Mode.Mode;
-import com.DCStudios.AppProjectXXX.Mode.canModeChange;
+import com.DCStudios.AppProjectXXX.Mode.CanModeChange;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
-public abstract class GameObject extends Entity implements canModeChange {
+public abstract class GameObject extends Entity implements CanModeChange {
 
 	private Mode mode;
 	

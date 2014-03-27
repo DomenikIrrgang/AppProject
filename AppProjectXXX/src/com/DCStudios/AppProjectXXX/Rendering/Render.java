@@ -23,7 +23,7 @@ public class Render {
 
 	public boolean renderLight = false;
 	public boolean renderBackground = true;
-	public boolean renderPhysic = true;
+	public boolean renderPhysic = false;
 
 	private Box2DDebugRenderer box2DRenderer;
 
@@ -55,7 +55,6 @@ public class Render {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		Gdx.app.log("FPS", String.valueOf(Gdx.graphics.getFramesPerSecond()));
 		batch.setProjectionMatrix(camera.combined);
 
 		map.step();

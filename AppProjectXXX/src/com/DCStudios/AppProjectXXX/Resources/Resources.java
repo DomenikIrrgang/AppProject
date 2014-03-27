@@ -10,12 +10,14 @@ public final class Resources {
 	
 	public static final String path = "data/";	
 	public static final String GRASS = path + "grass.jpg";
-	public static final String BACKGROUND_STAR = path + "star_background.png";
+	public static final String BACKGROUND_STAR = path + "star.png";
 	public static final String TREE = path + "baum.png";
 	public static final String PLAYER_FIRE = path + "fire.png";
 	public static final String PLAYER_ICE = path + "ice.png";
 	public static final String OBJECT_GATE_FIRE = path + "gate_fire.png";
 	public static final String OBJECT_GATE_ICE = path + "gate_ice.png";
+	public static final String OBJECT_BALL_FIRE = path + "ball_fire.png";
+	public static final String OBJECT_BALL_ICE = path + "ball_ice.png";
 	
 	public static <T> T get(String id, Class<T> clazz) {
 		manager.finishLoading();
@@ -37,5 +39,7 @@ public final class Resources {
 		manager.load(OBJECT_GATE_ICE, Texture.class, parameter);
 		manager.load(OBJECT_GATE_FIRE, Texture.class, parameter);
 		manager.load(BACKGROUND_STAR, Texture.class, parameter);
+		manager.load(OBJECT_BALL_FIRE, Texture.class, parameter);
+		manager.load(OBJECT_BALL_ICE, Texture.class, parameter);
 	}
 }

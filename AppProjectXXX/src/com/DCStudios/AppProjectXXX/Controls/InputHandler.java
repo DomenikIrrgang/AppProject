@@ -14,16 +14,17 @@ public class InputHandler implements InputProcessor {
 	}
 
 	@Override
-	public boolean keyDown(int keycode) {
+	public boolean keyDown(int keycode) {	
 		switch (keycode) {
 		case Keys.W: 
-			map.getPlayer().setVelocity(1,1);
+			map.getPlayer().getVelocity().y = 1;
 			return true;
 		case Keys.S:
-			map.getPlayer().setVelocity(1, -1);
+			map.getPlayer().getVelocity().y = -1;
 			return true;
 		case Keys.SPACE:
 			map.getPlayer().changeMode();
+			return true;
 		}
 		return false;
 	}
@@ -31,11 +32,15 @@ public class InputHandler implements InputProcessor {
 	@Override
 	public boolean keyUp(int keycode) {
 		switch (keycode) {
-		case Keys.W: 
-			map.getPlayer().setVelocity(1,0);
+		case Keys.W:
+			if (map.getPlayer().getVelocity().y == 1) {
+				map.getPlayer().getVelocity().y = 0;
+			}
 			return true;
 		case Keys.S:
-			map.getPlayer().setVelocity(1,0);
+			if (map.getPlayer().getVelocity().y == -1) {
+				map.getPlayer().getVelocity().y = 0;
+			}
 			return true;
 		}
 		return false;

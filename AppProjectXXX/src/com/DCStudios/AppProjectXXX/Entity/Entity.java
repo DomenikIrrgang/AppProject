@@ -27,6 +27,8 @@ public abstract class Entity implements Drawable {
 	protected BodyDef bodyDef;
 	protected FixtureDef fixtureDef;
 	protected Shape shape;
+	
+	protected boolean visible = true;
 
 	public Entity(Texture texture, Vector2 position, Measure measure) {
 		this.texture = texture;
@@ -69,7 +71,9 @@ public abstract class Entity implements Drawable {
 	
 	@Override
 	public void draw(SpriteBatch batch) {
-		sprite.draw(batch);
+		if (visible) {
+			sprite.draw(batch);
+		}	
 	}
 
 	public void update() {
